@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/Item.RootLayout.WithImage">
+
+    <LinearLayout
+            style="@style/Item.Layout.Info">
+
+        <TextView
+                android:id="@+id/tv_rocket_name"
+                style="@style/Item.Title"
+                tools:text="Rick and Morty"/>
+
+        <TextView
+                android:id="@+id/tv_rocket_cost_per_launch"
+                style="@style/Item.Info"
+                tools:text="status"/>
+
+        <TextView
+                android:id="@+id/tv_rocket_first_flight"
+                style="@style/Item.Info"
+                tools:text="gender"/>
+
+        <TextView
+                android:id="@+id/tv_rocket_height"
+                style="@style/Item.Info"
+                tools:text="species"/>
+
+        <TextView
+                android:id="@+id/tv_rocket_weight"
+                style="@style/Item.Info"
+                tools:text="origin"/>
+    </LinearLayout>
+
+    <ImageView
+            android:id="@+id/iv_rocket"
+            style="@style/Item.Layout.Image"
+            android:contentDescription="@string/rocket_desc_image"
+            tools:src="@tools:sample/avatars"/>
+
+</LinearLayout>

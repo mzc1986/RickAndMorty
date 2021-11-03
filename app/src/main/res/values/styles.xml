@@ -1,0 +1,87 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="RootLayout">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_margin">@dimen/margin_tiny</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Button.RootLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:weightSum">3</item>
+    </style>
+
+    <style name="Button.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="DataContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margin_tiny</item>
+    </style>
+
+
+    <style name="Item">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Item.RootLayout">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="Item.RootLayout.WithImage">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:weightSum">2</item>
+    </style>
+
+    <style name="Item.RootLayout.NoImage">
+        <item name="android:layout_margin">@dimen/margin_tiny</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Item.Layout">
+        <item name="android:layout_width">@dimen/dimen_0</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="Item.Layout.Info">
+        <item name="android:layout_margin">@dimen/margin_tiny</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Item.Layout.Image">
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">fitEnd</item>
+    </style>
+
+    <style name="Item.Title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_tiny</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/title_font_size</item>
+    </style>
+
+    <style name="Item.Info">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_tiny</item>
+    </style>
+
+    <style name="Dialog">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Dialog.Layout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/margin_small</item>
+    </style>
+</resources>

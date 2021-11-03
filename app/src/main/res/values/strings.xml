@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Rick and Morty</string>
+
+    <!-- Buttons -->
+    <string name="button_rockets">Rockets</string>
+    <string name="button_next_flights">Next flights</string>
+    <string name="button_events">Past events</string>
+    <string name="button_set_theme">Set theme mode</string>
+
+    <!-- Info -->
+    <string name="rocket_name">"Cost per launch: \$%1$dm"</string>
+    <string name="rocket_first_flight">"First flight: %1$s"</string>
+    <string name="rocket_height">"Height: %1$.0fm"</string>
+    <string name="rocket_weight">"Weight: %1$dt"</string>
+    <string name="rocket_desc_image">Rocket image</string>
+
+    <string name="flight_name">"Mission name: %1$s"</string>
+    <string name="flight_event_date">"Date: %1$s"</string>
+
+    <!-- Toasts -->
+    <string name="toast_no_link">Couldn\'t find more info</string>
+    <string name="toast_no_campaign">Couldn\'t find link to campaign yet</string>
+    <string name="toast_no_article">Couldn\'t find link to article</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_title">Go to external page?</string>
+    <string name="dialog_message">This site will contain more details about the item.</string>
+    <string name="dialog_checkbox">Don\'t ask again</string>
+    <string name="dialog_btn_positive">OK</string>
+    <string name="dialog_btn_negative">Cancel</string>
+    <string name="no_result">Sorry no result found!</string>
+    <string name="enter_text">Please enter text!</string>
+    <string name="check_internet">Please check internet connection!</string>
+</resources>
