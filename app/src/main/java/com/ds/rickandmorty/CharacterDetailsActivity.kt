@@ -1,55 +1,47 @@
-package com.ds.rickandmorty;
+package com.ds.rickandmorty
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.net.Uri
+import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.ds.rickandmorty.databinding.ActivityCharDetailsBinding
+import com.ds.rickandmorty.model.Result
 
-import androidx.appcompat.app.AppCompatActivity;
+class CharacterDetailsActivity : AppCompatActivity() {
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.ds.rickandmorty.databinding.ActivityCharDetailsBinding;
-import com.ds.rickandmorty.model.Result;
+    private lateinit var binding: ActivityCharDetailsBinding
 
-import java.util.Arrays;
-import java.util.List;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+        binding = ActivityCharDetailsBinding.inflate(layoutInflater)
 
-public class CharacterDetailsActivity extends AppCompatActivity {
+        val view: View = binding.root
+        setContentView(view)
 
-    ActivityCharDetailsBinding binding;
+        title = "Character Details"
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        val intent = intent
+        var results = intent.getSerializableExtra("character") as Result
 
-        binding = ActivityCharDetailsBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        binding.charDetailsLayout.tvStatus.text = results.status
+        binding.charDetailsLayout.tvGender.text = results.gender
+        binding.charDetailsLayout.tvSpecies.text = results.species
+        binding.charDetailsLayout.tvLocation.text = results.location?.name
+        binding.charDetailsLayout.tvOrigin.text = results.origin?.name
 
-        setTitle("Character Details");
+        val spinner = findViewById<View>(R.id.spinner) as Spinner
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, results.episode!!)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
 
-        Intent intent = getIntent();
-        Result results = (Result) intent.getSerializableExtra("character");
-
-        binding.charDetailsLayout.tvStatus.setText(results.getStatus());
-        binding.charDetailsLayout.tvGender.setText(results.getGender());
-        binding.charDetailsLayout.tvSpecies.setText(results.getSpecies());
-        binding.charDetailsLayout.tvLocation.setText(results.getLocation().getName());
-        binding.charDetailsLayout.tvOrigin.setText(results.getOrigin().getName());
-
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, results.getEpisode());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        Glide.with(this).load(Uri.parse(results.getImage()))
+        Glide.with(this).load(Uri.parse(results.image))
                 .thumbnail(0.5f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(binding.charDetailsLayout.ivDetailedActivity);
+                .into(binding.charDetailsLayout.ivDetailedActivity)
     }
-
 }

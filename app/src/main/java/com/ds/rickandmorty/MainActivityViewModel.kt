@@ -1,42 +1,27 @@
-package com.ds.rickandmorty;
+package com.ds.rickandmorty
 
-import android.util.Log;
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import com.ds.rickandmorty.model.Character
+import com.ds.rickandmorty.repository.CharacterRepository
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+class MainActivityViewModel : ViewModel() {
 
-import com.ds.rickandmorty.model.Character;
-import com.ds.rickandmorty.model.Result;
-import com.ds.rickandmorty.repository.CharacterRepository;
+    private val characterRepository: CharacterRepository = CharacterRepository()
 
-import java.util.List;
+    fun getPages(i: Int) =
+        characterRepository.getAllCharacters(i)
 
+    fun searchCharacters(name: String?, status: String?) =
+        characterRepository.searchCharacters(name, status)
 
-public class MainActivityViewModel extends ViewModel {
+    val allCharactersLiveData: LiveData<Character?>
+        get() = characterRepository.allCharLiveData
 
-    private static final String TAG = "retrofit";
+    val filteredCharLiveData: LiveData<Character?>
+        get() = characterRepository.filteredCharLiveData
 
-    private CharacterRepository characterRepository;
-
-    public MainActivityViewModel() {
-        super();
-        characterRepository = new CharacterRepository();
-        getPages(1);
-    }
-
-    public void getPages(int i){
-        characterRepository.getAllCharacters(i);
-    }
-    public void searchCharacters(String name, String status){
-        characterRepository.searchCharacters(name, status);
-    }
-
-    public LiveData<Character> getAllCharactersLiveData(){
-        return characterRepository.getAllCharLiveData();
-    }
-
-    public LiveData<Character> getFilteredCharLiveData(){
-        return characterRepository.getFilteredCharLiveData();
+    init {
+        getPages(1)
     }
 }

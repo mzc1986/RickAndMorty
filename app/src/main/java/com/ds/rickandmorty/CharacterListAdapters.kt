@@ -1,87 +1,62 @@
-package com.ds.rickandmorty;
+package com.ds.rickandmorty
 
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.ds.rickandmorty.CharacterListAdapters.CharacterViewHolder
+import com.ds.rickandmorty.databinding.ItemCharacterBinding
+import com.ds.rickandmorty.model.Result
+import java.util.*
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.recyclerview.widget.RecyclerView;
+class CharacterListAdapters : RecyclerView.Adapter<CharacterViewHolder>() {
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.ds.rickandmorty.databinding.ItemCharacterBinding;
-import com.ds.rickandmorty.model.Result;
+    private var result: MutableList<Result> = ArrayList()
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class CharacterListAdapters extends RecyclerView.Adapter<CharacterListAdapters.CharacterViewHolder> {
-
-    private List<Result> result = new ArrayList<>();
-
-    public void addResult(List<Result> result){
-        this.result.addAll(result);
-        notifyDataSetChanged();
+    fun addResult(result: List<Result>?) {
+        this.result.addAll(result!!)
+        notifyDataSetChanged()
     }
 
-    public void clearAdapter(){
-        this.result = new ArrayList<>();
-        notifyDataSetChanged();
+    fun clearAdapter() {
+        result = ArrayList()
+        notifyDataSetChanged()
     }
 
-    @NonNull
-    @Override
-    public CharacterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemCharacterBinding binding = ItemCharacterBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new CharacterViewHolder(binding);
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
+        val binding = ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CharacterViewHolder(binding)
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
-        holder.bind(result.get(position));
+    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
+        holder.bind(result[position])
     }
 
-    @Override
-    public int getItemCount() {
-        return this.result.size();
+    override fun getItemCount(): Int {
+        return result.size
     }
 
-    static final class CharacterViewHolder extends RecyclerView.ViewHolder{
+    class CharacterViewHolder(var binding: ItemCharacterBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(result: Result) {
+            binding.tvRocketName.text = result.name
+            binding.tvRocketCostPerLaunch.text = result.status
 
-        ItemCharacterBinding binding;
-
-        public CharacterViewHolder(ItemCharacterBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-
-        void bind(Result result){
-            binding.tvRocketName.setText(result.getName());
-            binding.tvRocketCostPerLaunch.setText(result.getStatus());
-
-            if (result.getImage() != null) {
-                String imageUrl = result.getImage()
-                        .replace("http://", "https://");
-
-                Glide.with(binding.getRoot().getContext()).load(imageUrl)
+            if (result.image != null) {
+                val imageUrl = result.image!!
+                        .replace("http://", "https://")
+                Glide.with(binding.root.context).load(imageUrl)
                         .thumbnail(0.5f)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(binding.ivRocket);
+                        .into(binding.ivRocket)
             }
 
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent detailsActivity = new Intent(binding.getRoot().getContext(), CharacterDetailsActivity.class);
-                    detailsActivity.putExtra("character", result);
-                    binding.getRoot().getContext().startActivity(detailsActivity);
-                }
-            });
+            binding.root.setOnClickListener {
+                val detailsActivity = Intent(binding.root.context, CharacterDetailsActivity::class.java)
+                detailsActivity.putExtra("character", result)
+                binding.root.context.startActivity(detailsActivity)
+            }
         }
     }
-
 }

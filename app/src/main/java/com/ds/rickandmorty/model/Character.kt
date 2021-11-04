@@ -1,37 +1,17 @@
+package com.ds.rickandmorty.model
 
-package com.ds.rickandmorty.model;
-
-import java.io.Serializable;
-import java.util.List;
-import javax.annotation.Generated;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+import javax.annotation.Generated
 
 @Generated("jsonschema2pojo")
-public class Character implements Serializable {
-
+class Character : Serializable {
     @SerializedName("info")
     @Expose
-    private Info info;
+    var info: Info? = null
+
     @SerializedName("results")
     @Expose
-    private List<Result> results = null;
-
-    public Info getInfo() {
-        return info;
-    }
-
-    public void setInfo(Info info) {
-        this.info = info;
-    }
-
-    public List<Result> getResults() {
-        return results;
-    }
-
-    public void setResults(List<Result> results) {
-        this.results = results;
-    }
-
+    var results: List<Result>? = null
 }
